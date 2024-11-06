@@ -12,6 +12,9 @@ export async function POST(request: Request) {
 
     const { data: payload } = data.data
 
+    console.log(payload);
+
+
     const { accessToken, refreshToken } = payload
 
     const decodeAccessToken = jwt.decode(accessToken) as { exp: number }
@@ -21,16 +24,16 @@ export async function POST(request: Request) {
     cookieStore.set('accessToken', accessToken, {
         path: '/',
         httpOnly: true,
-        sameSite: 'lax',
-        secure: true,
+        secure: false,
+        sameSite: 'none',
         expires: new Date(decodeAccessToken.exp * 1000)
     })
 
     cookieStore.set('refreshToken', refreshToken, {
         path: '/',
         httpOnly: true,
-        sameSite: 'lax',
-        secure: true,
+        secure: false,
+        sameSite: 'none',
         expires: new Date(decodeRefreshToken.exp * 1000)
     })
 

@@ -13,6 +13,7 @@ const httpClient = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+    // withCredentials: true
 });
 
 // Interceptor để xử lý request

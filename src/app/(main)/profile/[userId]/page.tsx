@@ -1,6 +1,7 @@
 import PostEditor from '@/components/post/editor/PostEditor';
 import ForYou from '@/components/post/ForYou';
 import { Button } from '@/components/ui/button';
+import { Rss, UserRoundPlus } from 'lucide-react';
 import Image from 'next/image';
 
 const avatars = [
@@ -39,7 +40,7 @@ const Page = async ({ params }: { params: { userId: string } }) => {
                         />
                     </div>
                     <div className="flex flex-col">
-                        <h1 className="text-3xl font-medium">Quoc Bao</h1>
+                        <h1 className="text-3xl font-simibold">Quoc Bao</h1>
                         <p className="mt-1 text-accent-foreground">
                             {' '}
                             1,1k followers . 1k following
@@ -60,11 +61,22 @@ const Page = async ({ params }: { params: { userId: string } }) => {
                                 </div>
                             ))}
                         </div>
+
                     </div>
+
                 </div>
-                <div className="">
-                    <Button className="w-full"> Follow</Button>
+
+
+                <div className=" flex gap-3">
+                    <Button className="w-full"><UserRoundPlus /> Follow</Button>
+                    <Button className="w-full"><Rss /> Follow</Button>
                 </div>
+            </div>
+
+            <div className="mt-4">
+                <p className="mt-8 font-medium text-muted-foreground">
+                    Quoc Bao is a passionate developer who loves creating user-friendly web applications. With a keen eye for design and a drive to innovate, he continually explores new technologies to enhance user experiences. When not coding, Quoc Bao enjoys photography and sharing his adventures with his extensive network of followers.
+                </p>
             </div>
 
             <div className="mt-5">
