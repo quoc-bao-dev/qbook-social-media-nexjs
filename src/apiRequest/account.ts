@@ -1,8 +1,9 @@
-import httpClient from "@/lib/http";
+import httpClient, { HttpResponse } from "@/lib/http";
+import { AccountResponseType } from "@/type/account";
 
 const accountApiRequest = {
-
-    getAccount: async (userId: string) => httpClient.get(`/users/${userId}`),
+    getMe: () => httpClient.get<HttpResponse<AccountResponseType>>(`/auth/me`),
+    getAccount: (userId: string) => httpClient.get<HttpResponse<AccountResponseType>>(`/user/${userId}`),
 }
 
 export default accountApiRequest

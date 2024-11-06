@@ -33,5 +33,12 @@ export async function POST(request: Request) {
         expires: new Date(decodeRefreshToken.exp * 1000)
     })
 
-    return Response.json(res)
+    const response = {
+        status: data.data.status,
+        message: data.data.message,
+        payload
+    }
+
+
+    return Response.json(response)
 }

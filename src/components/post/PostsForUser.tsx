@@ -1,12 +1,18 @@
 'use client'
 
-import { usePostQuery } from '@/queries/usePost'
+import React from 'react'
 import Post from './Post'
+import { usePostQueryById } from '@/queries/usePost'
+import { useParams } from 'next/navigation'
 
-const ForYou = () => {
+const PostsForUser = () => {
 
-    const postQuery = usePostQuery()
+    const { userId } = useParams()
+
+    const postQuery = usePostQueryById(userId as string)
     const posts = postQuery.data?.data.data || []
+    console.log(postQuery.data?.data.data);
+
 
 
     if (postQuery.isLoading) return <p>Loading...</p>
@@ -19,4 +25,4 @@ const ForYou = () => {
     )
 }
 
-export default ForYou
+export default PostsForUser

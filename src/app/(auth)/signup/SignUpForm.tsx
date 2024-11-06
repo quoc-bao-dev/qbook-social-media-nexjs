@@ -42,12 +42,17 @@ export default function SignUpForm() {
     try {
 
       const result = await registerMutation.mutateAsync(value)
+      console.log(result);
+
+      const { accessToken, refreshToken } = result.data.payload
+      localStorage.setItem("accessToken", JSON.stringify(accessToken));
+      localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
 
       toast({
         description: result.data.message,
       })
-      router.push("/")
 
+      router.push("/")
       router.refresh()
 
     } catch (error) {

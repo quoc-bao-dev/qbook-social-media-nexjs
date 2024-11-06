@@ -40,6 +40,9 @@ export default function LoginForm() {
 
     try {
       const result = await loginMutation.mutateAsync(value);
+      const { accessToken, refreshToken } = result.data.payload
+      localStorage.setItem("accessToken", JSON.stringify(accessToken));
+      localStorage.setItem("refreshToken", JSON.stringify(refreshToken));
 
       toast({
         description: result.data.message,

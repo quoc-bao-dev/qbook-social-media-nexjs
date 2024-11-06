@@ -1,3 +1,5 @@
+"use client"
+
 import {
     Dialog,
     DialogContent,
@@ -7,11 +9,17 @@ import { Input } from "@/components/ui/input"
 import { Film, Images, Video } from "lucide-react"
 import Image from "next/image"
 import FormCreatePost from "./FormCreatePost"
+import { useCallback, useState } from "react"
 
 const PostEditor = () => {
+
+    const [open, setOpen] = useState(false)
+
+    const onClose = useCallback(() => setOpen(false), [])
+
     return (
         <div className="p-4 rounded-lg shadow">
-            <Dialog>
+            <Dialog open={open} onOpenChange={setOpen}>
 
                 <div className="flex gap-3 items-center">
                     <Image src="https://images.unsplash.com/photo-1730407318819-6db610077721?q=80&w=1311&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="User avatar" width={48} height={48} className="rounded-full object-cover overflow-hidden size-[48px]" />
@@ -32,7 +40,7 @@ const PostEditor = () => {
 
                 </div>
                 <DialogContent>
-                    <FormCreatePost />
+                    <FormCreatePost onClose={onClose} />
                 </DialogContent>
             </Dialog>
         </div >

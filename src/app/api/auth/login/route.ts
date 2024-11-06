@@ -12,9 +12,6 @@ export async function POST(request: Request) {
 
     const { data: payload } = data.data
 
-    console.log(payload);
-
-
     const { accessToken, refreshToken } = payload
 
     const decodeAccessToken = jwt.decode(accessToken) as { exp: number }
@@ -39,7 +36,8 @@ export async function POST(request: Request) {
 
     const response = {
         status: data.data.status,
-        message: data.data.message
+        message: data.data.message,
+        payload
     }
 
     return Response.json(response)

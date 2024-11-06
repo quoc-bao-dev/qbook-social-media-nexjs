@@ -1,5 +1,6 @@
 "use client";
-import { cn } from "@/lib/utils";
+
+import { cn, imgUrl } from "@/lib/utils";
 import { LogOutIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import {
@@ -11,6 +12,7 @@ import {
   DropdownMenuTrigger
 } from "./ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
+import { useAccountQuery } from "@/queries/useAccount";
 
 interface UserButtonProps {
   className?: string;
@@ -18,23 +20,21 @@ interface UserButtonProps {
 
 export default function UserButton({ className }: UserButtonProps) {
 
-  const user = {
-    username: "Jenny Wilson",
-    email: "4Tn0p@example.com",
-    avatarUrl: "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  }
+  const { data } = useAccountQuery()
+  const user = data?.data.data
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={cn("flex-none rounded-full", className)}>
-          <UserAvatar avatarUrl={user.avatarUrl} size={40} />
+          <UserAvatar avatarUrl={imgUrl(user?.avatar as string)} size={40} />
         </button>
 
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>Logged in as @{user.username}</DropdownMenuLabel>
+        <DropdownMenuLabel>{user?.username}</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <Link href={`/users/${user.username}`}>
+        <Link href={`/profile/${user?._id}`}>
           <DropdownMenuItem>
             <UserIcon className="mr-2 size-4" />
             Profile

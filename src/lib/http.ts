@@ -2,8 +2,8 @@ import config from '@/config';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-export type HttpResponse = {
-    data: any;
+export type HttpResponse<T = any> = {
+    data: T;
     status: number;
     message: string;
 }
@@ -21,7 +21,8 @@ httpClient.interceptors.request.use(
     (config) => {
         // Thêm token vào header nếu có
         if (typeof window !== 'undefined') {
-            const token = Cookies.get('access_token')
+            const token = JSON.parse(localStorage.getItem('accessToken') as string);
+
             if (token) {
                 config.headers.Authorization = `Bearer ${token}`;
             }
