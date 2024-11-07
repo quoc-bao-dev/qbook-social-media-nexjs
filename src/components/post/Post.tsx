@@ -1,6 +1,6 @@
 'use client'
 
-import { imgUrl } from '@/lib/utils';
+import { getCurrentUserId, imgUrl } from '@/lib/utils';
 import { useLikePostMution } from '@/queries/usePost';
 import { PostResponseType } from '@/type/post';
 import { formatDistanceToNow } from "date-fns";
@@ -12,7 +12,9 @@ const Post = ({ _id, userId, media, content, hashtags, createdAt, likes }: TPost
 
     const likedMutation = useLikePostMution()
 
-    const isLiked = likes.map((like) => like._id).includes(userId._id)
+    const currentUserId = getCurrentUserId()
+
+    const isLiked = likes.map((like) => like._id).includes(currentUserId)
 
     const handleLike = () => {
         likedMutation.mutate(_id)

@@ -25,5 +25,5 @@ export const getCurrentUserId = () => {
       }
     }
   }
-  return null;
+  return '';
 }
